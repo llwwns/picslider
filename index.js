@@ -12,6 +12,7 @@ function getCurrentSize() {
 function loadNext() {
     if (count >= config.r) {
         location.reload();
+        return;
     }
     let file = ipcRenderer.sendSync('getNext');
     if (file !== null) {
