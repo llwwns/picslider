@@ -1,8 +1,13 @@
 const {ipcRenderer} = require('electron');
 const $ = require('jquery');
+const {basename} = require('path');
+const {Timer} = require("./timer");
 
 let config;
 let count = 0;
+let file;
+let pause = false;
+let timer;
 
 function getCurrentSize() {
     let {k, width, height} = config;
@@ -23,8 +28,10 @@ function loadNext() {
 }
 
 function loadImg(path) {
+    file = basename(path);
     let img = $(`<img src='file://${path}'>`);
-    $('body').html('').append(img);
+    $('#main').html('').append(img);
+    $('#tag').text(file);
     img.on('load', ()=> {
         count++;
         let [width, height] = [img.width(), img.height()];
@@ -32,7 +39,7 @@ function loadImg(path) {
         let r = Math.min(w / width, h / height);
         ipcRenderer.sendSync('resize', [r * width, r * height]);
         img.width('100%');
-        setTimeout(loadNext, config.i);
+        timer.start();
     });
     img.on('error', () => {
         ipcRenderer.sendSync('loadError');
@@ -43,5 +50,20 @@ function loadImg(path) {
 
 $(() => {
     config = ipcRenderer.sendSync('getConfig');
+    timer = new Timer(loadNext, config.i);
     loadNext();
+    document.onkeypress = (e) => {
+        if (e.code === "Space") {
+            if (pause) {
+                timer.resume();
+                $('#tag').hide();
+            } else {
+                timer.pause();
+                $('#tag').show();
+            }
+            pause = !pause;
+        }
+    }
+    Clipboard = require("clipboard");
+    new Clipboard("#tag");
 });

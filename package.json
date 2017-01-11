@@ -1,17 +1,17 @@
 {
-    "name": "picslider",
-    "version": "0.1.0",
-    "main": "main.js",
-    "bin": "main.js",
-    "dependencies": {
-        "electron": "^1.4.13",
-        "jquery": "^3.1.1",
-        "optimist": "^0.6.1",
-        "underscore": "^1.8.3"
-    },
-    "scripts": {
-        "app": "electron main.js",
-        "dep": "npm install",
-        "start": "npm run app"
-    }
+  "name": "picslider",
+  "version": "0.1.0",
+  "main": "main.js",
+  "bin": "main.js",
+  "dependencies": {
+    "clipboard": "^1.5.16",
+    "electron": "^1.4.13",
+    "jquery": "^3.1.1",
+    "optimist": "^0.6.1",
+    "underscore": "^1.8.3"
+  },
+  "scripts": {
+    "dep": "npm install",
+    "start": "electron main.js"
+  }
 }
