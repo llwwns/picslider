@@ -39,7 +39,11 @@ function loadImg(path) {
         let r = Math.min(w / width, h / height);
         ipcRenderer.sendSync('resize', [r * width, r * height]);
         img.width('100%');
-        timer.start();
+        if (pause) {
+            timer.reset();
+        } else {
+            timer.start();
+        }
     });
     img.on('error', () => {
         ipcRenderer.sendSync('loadError');

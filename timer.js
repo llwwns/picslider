@@ -12,8 +12,12 @@
         timerId = window.setTimeout(callback, remaining);
     };
 
-    this.start = function() {
+    this.reset = function() {
         remaining = delay;
+    }
+
+    this.start = function() {
+        this.reset();
         this.resume();
     }
 
