@@ -9,11 +9,6 @@ let file;
 let pause = false;
 let timer;
 
-function getCurrentSize() {
-    let {k, width, height} = config;
-    return [width * k, height * k];
-};
-
 function loadNext() {
     if (count >= config.r) {
         location.reload();
@@ -34,10 +29,7 @@ function loadImg(path) {
     $('#tag').text(file);
     img.on('load', ()=> {
         count++;
-        let [width, height] = [img.width(), img.height()];
-        let [w, h] = getCurrentSize();
-        let r = Math.min(w / width, h / height);
-        ipcRenderer.sendSync('resize', [r * width, r * height]);
+        ipcRenderer.sendSync('resize', [img.width(), img.height()]);
         img.width('100%');
         if (pause) {
             timer.reset();
