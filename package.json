@@ -5,13 +5,15 @@
   "bin": "main.js",
   "dependencies": {
     "clipboard": "^1.5.16",
-    "electron": "^1.4.13",
+    "electron": "^1.8.1",
+    "electron-packager": "^10.1.0",
     "jquery": "^3.1.1",
-    "optimist": "^0.6.1",
-    "underscore": "^1.8.3"
+    "lodash": "^4.17.4",
+    "optimist": "^0.6.1"
   },
   "scripts": {
     "dep": "npm install",
-    "start": "electron main.js"
+    "start": "electron main.js",
+    "build": "electron-packager ./ pic-slider --platform=win32 --arch=x64 --version=1.8.1 --asar"
   }
 }
