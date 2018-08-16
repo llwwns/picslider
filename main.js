@@ -2,7 +2,7 @@ const electron = require('electron')
 const {app, BrowserWindow, ipcMain} = require('electron')
 const path = require('path')
 const url = require('url')
-const {loadFileList} = require('./filelist')
+const FileList = require('./filelist')
 let {argv} = require('optimist')
 const config = Object.assign({
   i: 5000,
@@ -76,7 +76,7 @@ ipcMain.on('resize', (event, [width, height]) => {
   event.returnValue = null
 })
 
-const files = loadFileList(argv._)
+const files = new FileList(argv._)
 ipcMain.on('getNext', (event) => {
   event.returnValue = files.next()
 })

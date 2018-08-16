@@ -1,25 +1,31 @@
-exports.Timer = function(callback, delay) {
-  let timerId, start, remaining = delay
-
-  this.pause = function() {
-    window.clearTimeout(timerId)
-    remaining -= new Date() - start
+class Timer {
+  constructor(callback, delay) {
+    this._delay = delay
+    this._remaining = delay
+    this._callback = callback
+    this.resume()
   }
 
-  this.resume = function() {
-    start = new Date()
-    window.clearTimeout(timerId)
-    timerId = window.setTimeout(callback, remaining)
+  pause() {
+    window.clearTimeout(this._timerId)
+    this.remaining -= new Date() - this._start
   }
 
-  this.reset = function() {
-    remaining = delay
+  resume() {
+    this._start = new Date()
+    window.clearTimeout(this._timerId)
+    this._timerId = window.setTimeout(this._callback, this._remaining)
   }
 
-  this.start = function() {
+  reset() {
+    this._remaining = this._delay
+  }
+
+  start() {
     this.reset()
     this.resume()
   }
 
-  this.resume()
 }
+
+module.exports = Timer

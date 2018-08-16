@@ -1,7 +1,7 @@
 const {ipcRenderer} = require('electron')
 const $ = require('jquery')
 const {basename} = require('path')
-const {Timer} = require("./timer")
+const Timer = require("./timer")
 
 let config
 let count = 0

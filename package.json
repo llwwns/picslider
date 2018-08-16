@@ -4,16 +4,16 @@
   "main": "main.js",
   "bin": "main.js",
   "dependencies": {
-    "clipboard": "^1.5.16",
-    "electron": "^1.8.1",
-    "electron-packager": "^10.1.0",
-    "jquery": "^3.1.1",
-    "lodash": "^4.17.4",
+    "clipboard": "^2.0.1",
+    "electron": "^2.0.7",
+    "electron-packager": "^12.1.0",
+    "jquery": "^3.3.1",
+    "lodash": "^4.17.10",
     "optimist": "^0.6.1"
   },
   "scripts": {
     "dep": "npm install",
     "start": "electron main.js",
-    "build": "electron-packager ./ pic-slider --platform=win32 --arch=x64 --version=1.8.1 --asar"
+    "build": "electron-packager ./ pic-slider --platform=win32 --arch=x64 --asar"
   }
 }
