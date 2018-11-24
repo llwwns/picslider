@@ -60,9 +60,16 @@ html, body {
   -webkit-app-region: no-drag;
 }
 #main img {
+  object-fit: contain;
+}
+.norm {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+}
+.rotate {
+  width: 100vh;
+  height: 100vw;
+  transform: rotate(90deg);
 }
 
 #close {
@@ -78,6 +85,7 @@ html, body {
   font-family: arial;
   -webkit-app-region: no-drag;
   cursor: default;
+  z-index: 1000;
 }
 
 #close:hover {

@@ -3,9 +3,12 @@ const {app, BrowserWindow, ipcMain} = require('electron')
 const path = require('path')
 const url = require('url')
 const FileList = require('./filelist')
+const { powerSaveBlocker } = require('electron')
+const id = powerSaveBlocker.start('prevent-display-sleep')
+
 let {argv} = require('optimist')
 const config = Object.assign({
-  i: 5000,
+  i: 10000,
   k: 0.9,
   r: 50,
   o: 0.7,
@@ -28,6 +31,7 @@ function createWindow () {
     protocol: 'file:',
     slashes: true
   }))
+  win.setFullScreen(true)
 
   win.on('closed', () => {
     win = null
@@ -44,6 +48,7 @@ function createWindow () {
   win.setAlwaysOnTop(true)
 
   win.isResizable(true)
+  //win.toggleDevTools()
 
   //const electronVibrancy = require('electron-vibrancy')
   //electronVibrancy.SetVibrancy(win, 2)

@@ -29,6 +29,11 @@ function loadImg(path) {
   img.on('load', ()=> {
     $('#main').html('').append(img)
     count++
+    if (img.width() > img.height()) {
+      img.addClass('norm');
+    } else {
+      img.addClass('rotate');
+    }
     //ipcRenderer.sendSync('resize', [img.width(), img.height()])
     if (pause) {
       timer.reset()
